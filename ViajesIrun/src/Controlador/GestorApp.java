@@ -20,7 +20,7 @@ public class GestorApp {
 			switch(select) {
 			case Visor.INSERTARCLIENTE:
 				gs.conectar();
-				Visor.operacion(gs.insertarCliente(Formulario.pedirDatos(scan)));
+				Visor.operacion(gs.insertarCliente(Formulario.pedirDatosCliente(scan)));
 				gs.cerrar();
 				break;
 				
@@ -35,29 +35,37 @@ public class GestorApp {
 				Visor.verUno(gs.buscarCliente(Formulario.pedirDNI(scan)));
 				gs.cerrar();
 				break;
+				
 			case Visor.MODIFICARCLIENTE:
-				//TODO
+				gs.conectar();
+				String DNI= Formulario.pedirDNI(scan);
+				Visor.verUno(gs.buscarCliente(DNI));
+				Visor.operacion(gs.modificarCliente(DNI, Formulario.pedirDatosCliente(scan)));
 				break;
+				
 			case Visor.BORRARCLIENTE:
 				gs.conectar();
 				Visor.operacion(gs.borrarCliente(Formulario.pedirDNI(scan)));
 				gs.cerrar();
 				break;
-//			case Visor.INSERTARHOTEL:
-//				//TODO
-//				break;
-//			case Visor.VISUALIZARHOTELES:
-//				//TODO
-//				break;
-//			case Visor.VISUALIZARHOTEL:
-//				//TODO
-//				break;
-//			case Visor.MODIFICARHOTEL:
-//				//TODO
-//				break;
-//			case Visor.BORRARHOTEL:
-//				//TODO
-//				break;
+				
+			case Visor.INSERTARHOTEL:
+				gs.conectar();
+				Hotel h = Formulario.pedirDatosHotel(scan);
+				Visor.operacion();
+				break;
+			case Visor.VISUALIZARHOTELES:
+				//TODO
+				break;
+			case Visor.VISUALIZARHOTEL:
+				//TODO
+				break;
+			case Visor.MODIFICARHOTEL:
+				//TODO
+				break;
+			case Visor.BORRARHOTEL:
+				//TODO
+				break;
 //			case Visor.INSERTARRESERVA:
 //				//TODO
 //				break;

@@ -85,6 +85,35 @@ public class GestorBBDD extends Conector{
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public boolean modificarCliente(String DNI, Cliente c) {
+		String sql = "UPDATE clientes SET DNI=?, nombre=?, apellidos=?, direccion=?, localidad=? WHERE DNI = ?";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, c.getDni());
+			pst.setString(2, c.getNombre());
+			pst.setString(3, c.getApellido());
+			pst.setString(4, c.getDireccion());
+			pst.setString(5, c.getLocalidad());
+			pst.setString(6, DNI);
+			pst.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}		
+	}
+	
+	public boolean insertarHotel(Hotel h) {
+		String sql = "INSERT INTO hoteles (cif,nombre,gerente,estrellas,compañia) VALUES (?,?,?,?,?)";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 	}
 }

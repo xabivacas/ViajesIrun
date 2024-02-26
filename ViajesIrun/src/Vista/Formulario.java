@@ -8,7 +8,7 @@ public class Formulario {
 		System.out.println("Introduzca el DNI");
 		return scan.nextLine();
 	}
-	public static Cliente pedirDatos(Scanner scan) {
+	public static Cliente pedirDatosCliente(Scanner scan) {
 		Cliente c = new Cliente();
 		
 		c.setDni(pedirDNI(scan));
@@ -25,5 +25,24 @@ public class Formulario {
 		c.setLocalidad(scan.nextLine());
 		
 		return c;
+	}
+	public static Hotel pedirDatosHotel(Scanner scan) {
+		Hotel h = new Hotel();
+		
+		System.out.println("Introduzca el CIF");
+		h.setCif(scan.nextLine());
+		
+		System.out.println("Introduzca el nombre");
+		h.setNombre(scan.nextLine());
+		
+		System.out.println("Introduzca el nombre del gerente");
+		h.setGerente(scan.nextLine());
+		
+		System.out.println("Introduza el numero de estrellas");
+		h.setEntrella(Integer.parseInt(scan.nextLine()));
+		
+		System.out.println("Introduzca el nombre de la compañia");
+		h.setCompania(scan.nextLine());
+		return h;
 	}
 }

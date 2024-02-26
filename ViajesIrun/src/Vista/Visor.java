@@ -23,20 +23,8 @@ public class Visor {
 	
 	public static void menu(){
 		System.out.println("\n---Menu---");
-		System.out.println("\nGestionar Clientes");
-		System.out.println("   "+INSERTARCLIENTE+"-Insertar Cliente");
-		System.out.println("   "+VISUALIZARCLIENTES+"-Ver Clientes");
-		System.out.println("   "+VISUALIZARCLIENTE+"-Buscar Cliente");
-		System.out.println("   "+MODIFICARCLIENTE+"-Modificar Cliente");
-		System.out.println("   "+BORRARCLIENTE+"-Borrar Cliente");
-
-//		System.out.println("\nGestionar Hoteles");
-//		System.out.println("   "+INSERTARHOTEL+"-Insertar Hotel");
-//		System.out.println("   "+VISUALIZARHOTELES+"-Ver Hoteles");
-//		System.out.println("   "+VISUALIZARHOTEL+"-Buscar Hotel");
-//		System.out.println("   "+MODIFICARHOTEL+"-Modificar Hotel");
-//		System.out.println("   "+BORRARHOTEL+"-Borrar Hotel");
-//
+		menuClientes();
+		menuHoteles();
 //		System.out.println("\nGestionar Reservas");
 //		System.out.println("   "+INSERTARRESERVA+"-Insertar Reserva");
 //		System.out.println("   "+VISUALIZARRESERVAS+"-Ver Reservas");
@@ -45,6 +33,24 @@ public class Visor {
 //		System.out.println("   "+BORRARRESERVA+"-Borrar Reserva");
 //		
 		System.out.println("\n"+SALIR+"-Salir");
+	}
+
+	private static void menuHoteles() {
+		System.out.println("\nGestionar Hoteles");
+		System.out.println("   "+INSERTARHOTEL+"-Insertar Hotel");
+		System.out.println("   "+VISUALIZARHOTELES+"-Ver Hoteles");
+		System.out.println("   "+VISUALIZARHOTEL+"-Buscar Hotel");
+		System.out.println("   "+MODIFICARHOTEL+"-Modificar Hotel");
+		System.out.println("   "+BORRARHOTEL+"-Borrar Hotel");
+	}
+
+	private static void menuClientes() {
+		System.out.println("\nGestionar Clientes");
+		System.out.println("   "+INSERTARCLIENTE+"-Insertar Cliente");
+		System.out.println("   "+VISUALIZARCLIENTES+"-Ver Clientes");
+		System.out.println("   "+VISUALIZARCLIENTE+"-Buscar Cliente");
+		System.out.println("   "+MODIFICARCLIENTE+"-Modificar Cliente");
+		System.out.println("   "+BORRARCLIENTE+"-Borrar Cliente");
 	}
 	
 	public static <T> void visuArray(ArrayList<T> lista) {
@@ -55,6 +61,7 @@ public class Visor {
 	
 	public static  <T> void verUno (T item) {
 		System.out.println(item);
+		System.out.println("-----------\n");
 	}
 	
 	public static void operacion(Boolean b) {
