@@ -39,7 +39,7 @@ public class Formulario {
 		h.setGerente(scan.nextLine());
 		
 		System.out.println("Introduza el numero de estrellas");
-		h.setEntrella(Integer.parseInt(scan.nextLine()));
+		h.setEstrellas(Integer.parseInt(scan.nextLine()));
 		
 		System.out.println("Introduzca el nombre de la compañia");
 		h.setCompania(scan.nextLine());

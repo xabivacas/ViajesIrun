@@ -33,10 +33,10 @@ public class Hotel {
 	public void setGerente(String gerente) {
 		this.gerente = gerente;
 	}
-	public int getEntrella() {
+	public int getEstrellas() {
 		return estrellas;
 	}
-	public void setEntrella(int entrella) {
+	public void setEstrellas(int entrella) {
 		this.estrellas = entrella;
 	}
 	public String getCompania() {

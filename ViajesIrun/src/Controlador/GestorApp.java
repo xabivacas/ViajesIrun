@@ -52,7 +52,7 @@ public class GestorApp {
 			case Visor.INSERTARHOTEL:
 				gs.conectar();
 				Hotel h = Formulario.pedirDatosHotel(scan);
-				Visor.operacion();
+				Visor.operacion(gs.insertarHotel(h));
 				break;
 			case Visor.VISUALIZARHOTELES:
 				//TODO
