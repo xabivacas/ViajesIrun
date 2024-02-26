@@ -21,6 +21,7 @@ public class GestorApp {
 			case Visor.INSERTARCLIENTE:
 				gs.conectar();
 				Visor.operacion(gs.insertarCliente(Formulario.pedirDatos(scan)));
+				gs.cerrar();
 				break;
 				
 			case Visor.VISUALIZARCLIENTES:
@@ -38,7 +39,7 @@ public class GestorApp {
 				//TODO
 				break;
 			case Visor.BORRARCLIENTE:
-				//TODO
+				
 				break;
 			case Visor.INSERTARHOTEL:
 				//TODO

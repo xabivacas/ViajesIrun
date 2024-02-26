@@ -56,4 +56,11 @@ public class Visor {
 	public static <T> void verUno (T item) {
 		System.out.println(item);
 	}
+	public static void operacion(Boolean b) {
+		if(b) {
+			System.out.println("Operacion ejecutada con exito");
+		}else {
+			System.out.println("No se ha podido ejecutar la operacion");
+		}
+	}
 }

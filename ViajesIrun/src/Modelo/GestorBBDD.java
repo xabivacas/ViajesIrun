@@ -54,4 +54,23 @@ public class GestorBBDD extends Conector{
 		}
 		return c;
 	}
+	public boolean insertarCliente(Cliente c) {
+		String sql = "INSERT INTO clientes VALUES (?,?,?,?,?)";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, c.getDni());
+			pst.setString(2, c.getNombre());
+			pst.setString(3, c.getApellido());
+			pst.setString(4, c.getDireccion());
+			pst.setString(5, c.getLocalidad());
+			
+			pst.execute();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Ha fallado en insertarCliente");
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 }
