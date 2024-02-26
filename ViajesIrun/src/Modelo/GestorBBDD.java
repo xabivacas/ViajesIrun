@@ -67,10 +67,24 @@ public class GestorBBDD extends Conector{
 			pst.execute();
 			return true;
 		} catch (SQLException e) {
-			System.out.println("Ha fallado en insertarCliente");
 			e.printStackTrace();
+			return false;
 		}
 		
-		return false;
+		
+	}
+	public boolean borrarCliente(String DNI) {
+		String sql = "DELETE FROM clientes WHERE DNI=?";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, DNI);
+			pst.execute();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
 	}
 }

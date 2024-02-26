@@ -39,38 +39,40 @@ public class GestorApp {
 				//TODO
 				break;
 			case Visor.BORRARCLIENTE:
-				
+				gs.conectar();
+				Visor.operacion(gs.borrarCliente(Formulario.pedirDNI(scan)));
+				gs.cerrar();
 				break;
-			case Visor.INSERTARHOTEL:
-				//TODO
-				break;
-			case Visor.VISUALIZARHOTELES:
-				//TODO
-				break;
-			case Visor.VISUALIZARHOTEL:
-				//TODO
-				break;
-			case Visor.MODIFICARHOTEL:
-				//TODO
-				break;
-			case Visor.BORRARHOTEL:
-				//TODO
-				break;
-			case Visor.INSERTARRESERVA:
-				//TODO
-				break;
-			case Visor.VISUALIZARRESERVAS:
-				//TODO
-				break;
-			case Visor.VISUALIZARRESERVA:
-				//TODO
-				break;
-			case Visor.MODIFICARRESERVA:
-				//TODO
-				break;
-			case Visor.BORRARRESERVA:
-				//TODO
-				break;
+//			case Visor.INSERTARHOTEL:
+//				//TODO
+//				break;
+//			case Visor.VISUALIZARHOTELES:
+//				//TODO
+//				break;
+//			case Visor.VISUALIZARHOTEL:
+//				//TODO
+//				break;
+//			case Visor.MODIFICARHOTEL:
+//				//TODO
+//				break;
+//			case Visor.BORRARHOTEL:
+//				//TODO
+//				break;
+//			case Visor.INSERTARRESERVA:
+//				//TODO
+//				break;
+//			case Visor.VISUALIZARRESERVAS:
+//				//TODO
+//				break;
+//			case Visor.VISUALIZARRESERVA:
+//				//TODO
+//				break;
+//			case Visor.MODIFICARRESERVA:
+//				//TODO
+//				break;
+//			case Visor.BORRARRESERVA:
+//				//TODO
+//				break;
 			case Visor.SALIR:
 				//TODO
 				break;

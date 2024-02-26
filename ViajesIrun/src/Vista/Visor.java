@@ -30,20 +30,20 @@ public class Visor {
 		System.out.println("   "+MODIFICARCLIENTE+"-Modificar Cliente");
 		System.out.println("   "+BORRARCLIENTE+"-Borrar Cliente");
 
-		System.out.println("\nGestionar Hoteles");
-		System.out.println("   "+INSERTARHOTEL+"-Insertar Hotel");
-		System.out.println("   "+VISUALIZARHOTELES+"-Ver Hoteles");
-		System.out.println("   "+VISUALIZARHOTEL+"-Buscar Hotel");
-		System.out.println("   "+MODIFICARHOTEL+"-Modificar Hotel");
-		System.out.println("   "+BORRARHOTEL+"-Borrar Hotel");
-
-		System.out.println("\nGestionar Reservas");
-		System.out.println("   "+INSERTARRESERVA+"-Insertar Reserva");
-		System.out.println("   "+VISUALIZARRESERVAS+"-Ver Reservas");
-		System.out.println("   "+VISUALIZARRESERVA+"-Buscar Reserva");
-		System.out.println("   "+MODIFICARRESERVA+"-Modificar Reserva");
-		System.out.println("   "+BORRARRESERVA+"-Borrar Reserva");
-		
+//		System.out.println("\nGestionar Hoteles");
+//		System.out.println("   "+INSERTARHOTEL+"-Insertar Hotel");
+//		System.out.println("   "+VISUALIZARHOTELES+"-Ver Hoteles");
+//		System.out.println("   "+VISUALIZARHOTEL+"-Buscar Hotel");
+//		System.out.println("   "+MODIFICARHOTEL+"-Modificar Hotel");
+//		System.out.println("   "+BORRARHOTEL+"-Borrar Hotel");
+//
+//		System.out.println("\nGestionar Reservas");
+//		System.out.println("   "+INSERTARRESERVA+"-Insertar Reserva");
+//		System.out.println("   "+VISUALIZARRESERVAS+"-Ver Reservas");
+//		System.out.println("   "+VISUALIZARRESERVA+"-Buscar Reserva");
+//		System.out.println("   "+MODIFICARRESERVA+"-Modificar Reserva");
+//		System.out.println("   "+BORRARRESERVA+"-Borrar Reserva");
+//		
 		System.out.println("\n"+SALIR+"-Salir");
 	}
 	
@@ -53,9 +53,10 @@ public class Visor {
 		}
 	}
 	
-	public static <T> void verUno (T item) {
+	public static  <T> void verUno (T item) {
 		System.out.println(item);
 	}
+	
 	public static void operacion(Boolean b) {
 		if(b) {
 			System.out.println("Operacion ejecutada con exito");
