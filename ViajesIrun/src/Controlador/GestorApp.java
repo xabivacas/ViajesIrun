@@ -54,10 +54,12 @@ public class GestorApp {
 				gs.conectar();
 				Hotel hotel = Formulario.pedirDatosHotel(scan);
 				gs.insertarHotel(hotel);
+				
 				while(Formulario.quieresInsertarHabitacion(scan)) {
 					Hotel h = gs.buscarHotel(hotel.getNombre());
 					Visor.operacion(gs.insertarHabitacion(h,Formulario.pedirDatosHabitacion(scan, h)));
 				}
+				
 				break;
 			case Visor.VISUALIZARHOTELES:
 				gs.conectar();
@@ -66,8 +68,9 @@ public class GestorApp {
 				
 				while(i<hoteles.size()) {
 					Hotel h = gs.buscarHotel(hoteles.get(i).getNombre());
-					Visor.verUno(h);
-					Visor.visuArray(gs.buscarHabitaciones(h));
+					
+					visuHotelyHabitaciones(gs, h);
+					
 					i++;
 					System.out.println("\n\n\n");
 				}
@@ -76,15 +79,16 @@ public class GestorApp {
 			case Visor.VISUALIZARHOTEL:
 				gs.conectar();
 				Hotel h = gs.buscarHotel(Formulario.pedirNombre(scan));
-				Visor.verUno(h);
-				Visor.visuArray(gs.buscarHabitaciones(h));
+				visuHotelyHabitaciones(gs, h);
 				gs.cerrar();
 				break;
 			case Visor.MODIFICARHOTEL:
 				//TODO
 				break;
 			case Visor.BORRARHOTEL:
-				//TODO
+				gs.conectar();
+				Visor.operacion(gs.borrarHotel(gs.buscarHotel(Formulario.pedirNombre(scan))));
+				gs.cerrar();
 				break;
 //			case Visor.INSERTARRESERVA:
 //				//TODO
@@ -110,5 +114,10 @@ public class GestorApp {
 				break;
 			}
 		}while(select!=0);
+	}
+	
+	private static void visuHotelyHabitaciones(GestorBBDD gs, Hotel h) {
+		Visor.verUno(h);
+		Visor.visuArray(gs.buscarHabitaciones(h));
 	}
 }
