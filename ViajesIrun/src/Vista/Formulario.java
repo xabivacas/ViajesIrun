@@ -1,6 +1,8 @@
 package Vista;
 
 import java.util.Scanner;
+
+import Controlador.GestorApp;
 import Modelo.*;
 public class Formulario {
 
@@ -76,6 +78,20 @@ public class Formulario {
 		}else {
 			return false;
 		}
+	}
+	public static Reserva pedirDatosReserva(Scanner scan, GestorBBDD gs) {
+		Reserva r = new Reserva();
 		
+		System.out.println("Inserte el Dni");
+		r.setCliente(gs.buscarCliente(scan.nextLine()));
+		
+		System.out.println("Inserte el nombre del hotel");
+		Hotel h = gs.buscarHotel(Formulario.pedirNombre(scan));
+		Visor.verUno(h);
+		Visor.visuArray(gs.buscarHabitaciones(h));
+		
+		System.out.println("Seleccione la habitacion");
+		r.setHabitacion(gs.bu);
+		return r;
 	}
 }

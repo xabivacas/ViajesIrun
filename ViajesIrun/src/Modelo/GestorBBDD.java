@@ -188,6 +188,31 @@ public class GestorBBDD extends Conector{
 		}
 		return habitaciones;
 	}
+	
+	public Habitacion buscarHabitacion(Hotel hotel,int numero){
+		String sql = "SELECT * FROM habitaciones WHERE id_hotel=? AND numero=?";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, hotel.getId());
+			pst.setInt(2, numero);
+			ResultSet rs = pst.executeQuery();
+			
+			while (rs.next()) {
+				Habitacion h = new Habitacion();
+				
+				h.setId(rs.getInt("id"));
+				h.setHotel(hotel);
+				h.setNumero(rs.getInt("numero"));
+				h.setDescripcion(rs.getString("descripcion"));
+				h.setPrecio(rs.getInt("precio"));
+				
+			}
+		} catch (SQLException e) {
+			System.out.println("Error buscarhabitaciones");
+			e.printStackTrace();
+		}
+		return habitaciones;
+	}
 	public ArrayList<Hotel> visualizarHoteles(){
 		String sql = "SELECT * FROM hoteles";
 		ArrayList<Hotel> hoteles = new ArrayList<>();
@@ -245,7 +270,6 @@ public class GestorBBDD extends Conector{
 			e.printStackTrace();
 			return false;
 		}
-		
-		
 	}
+	
 }
