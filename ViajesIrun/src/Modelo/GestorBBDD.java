@@ -227,6 +227,24 @@ public class GestorBBDD extends Conector{
 			e.printStackTrace();
 			return false;
 		}
+	}
+	public boolean modHotel(int id,Hotel h) {
+		String sql = "UPDATE hoteles SET cif=?,nombre=?,gerente=?,estrellas=?,compania=? WHERE id=?";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, h.getCif());
+			pst.setString(2, h.getNombre());
+			pst.setString(3, h.getGerente());
+			pst.setInt(4, h.getEstrellas());
+			pst.setString(5, h.getCompania());
+			pst.setInt(6, id);
+			
+			pst.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 		
 		
 	}

@@ -83,7 +83,10 @@ public class GestorApp {
 				gs.cerrar();
 				break;
 			case Visor.MODIFICARHOTEL:
-				//TODO
+				gs.conectar();
+				Hotel hot = gs.buscarHotel(Formulario.pedirNombre(scan));
+				visuHotelyHabitaciones(gs, hot);
+				Visor.operacion(gs.modHotel(hot.getId(), Formulario.pedirDatosHotel(scan)));
 				break;
 			case Visor.BORRARHOTEL:
 				gs.conectar();
