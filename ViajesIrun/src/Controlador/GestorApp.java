@@ -51,14 +51,20 @@ public class GestorApp {
 				
 			case Visor.INSERTARHOTEL:
 				gs.conectar();
-				Hotel h = Formulario.pedirDatosHotel(scan);
-				Visor.operacion(gs.insertarHotel(h));
+				Hotel hotel = Formulario.pedirDatosHotel(scan);
+				gs.insertarHotel(hotel);
+				while(Formulario.quieresInsertarHabitacion(scan)) {
+					Hotel h = gs.buscarHotel(hotel.getNombre());
+					Visor.operacion(gs.insertarHabitacion(h,Formulario.pedirDatosHabitacion(scan, h)));
+				}
 				break;
 			case Visor.VISUALIZARHOTELES:
 				//TODO
 				break;
 			case Visor.VISUALIZARHOTEL:
-				//TODO
+				gs.conectar();
+				Visor.verUno(gs.buscarHotel(Formulario.pedirNombre(scan)));
+				gs.cerrar();
 				break;
 			case Visor.MODIFICARHOTEL:
 				//TODO

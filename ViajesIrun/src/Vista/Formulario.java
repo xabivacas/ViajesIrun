@@ -8,6 +8,10 @@ public class Formulario {
 		System.out.println("Introduzca el DNI");
 		return scan.nextLine();
 	}
+	public static String pedirNombre(Scanner scan) {
+		System.out.println("Introduzca el Nombre");
+		return scan.nextLine();
+	}
 	public static Cliente pedirDatosCliente(Scanner scan) {
 		Cliente c = new Cliente();
 		
@@ -44,5 +48,34 @@ public class Formulario {
 		System.out.println("Introduzca el nombre de la compañia");
 		h.setCompania(scan.nextLine());
 		return h;
+	}
+	public static Habitacion pedirDatosHabitacion(Scanner scan, Hotel hotel) {
+		Habitacion h = new Habitacion();
+		
+		System.out.println("Introduzca numero de habitacion");
+		h.setNumero(Integer.parseInt(scan.nextLine()));
+		if(h.getNumero()==0) {
+			return h;
+		}else {
+		
+		System.out.println("Introduzca descripcion");
+		h.setDescripcion(scan.nextLine());
+		
+		System.out.println("Introduzca precio");
+		h.setPrecio(Integer.parseInt(scan.nextLine()));
+		
+		h.setHotel(hotel);
+		return h;
+		}
+	}
+	public static boolean quieresInsertarHabitacion(Scanner scan) {
+		System.out.println("¿Quiere insertar una habitacion? S/N");
+		
+		if(scan.nextLine().equalsIgnoreCase("S")) {
+			return true;
+		}else {
+			return false;
+		}
+		
 	}
 }

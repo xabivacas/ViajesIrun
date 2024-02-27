@@ -121,6 +121,49 @@ public class GestorBBDD extends Conector{
 			e.printStackTrace();
 			return false;
 		}
+	}
+	
+	public Hotel buscarHotel(String nombre) {
+		String sql = "SELECT * FROM hoteles WHERE nombre=?";
+		Hotel h = new Hotel();
 		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, nombre);
+			
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			
+			h.setId(rs.getInt("id"));
+			h.setCif(rs.getString("cif"));
+			h.setNombre(rs.getString("nombre"));
+			h.setEstrellas(rs.getInt("estrellas"));
+			h.setGerente(rs.getString("gerente"));
+			h.setCompania(rs.getString("compania"));
+			
+		} catch (SQLException e) {
+			System.out.println("Error en buscarHotel");
+			e.printStackTrace();
+		}
+		return h;
+	}
+	public boolean insertarHabitacion(Hotel hotel, Habitacion habitacion) {
+		String sql = "INSERT INTO habitaciones (id_hotel,numero,descripcion,precio) VALUES (?,?,?,?)";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, hotel.getId());
+			pst.setInt(2, habitacion.getNumero());
+			pst.setString(3, habitacion.getDescripcion());
+			pst.setInt(4, habitacion.getPrecio());
+			
+			pst.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	
+	
 	}
 }
