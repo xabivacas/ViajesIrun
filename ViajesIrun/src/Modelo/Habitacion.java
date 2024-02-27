@@ -41,8 +41,7 @@ public class Habitacion {
 	
 	@Override
 	public String toString() {
-		return "Habitacion [id=" + id + ", numero=" + numero + ", descripcion=" + descripcion + ", precio=" + precio
-				+ ", hotel=" + hotel + "]";
+		return "Numero=" + numero + ", Descripcion=" + descripcion + ", Precio=" + precio+"€";
 	}
 	
 }

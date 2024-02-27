@@ -48,8 +48,8 @@ public class Hotel {
 	
 	@Override
 	public String toString() {
-		return "Hotel [id=" + id + ", cif=" + cif + ", nombre=" + nombre + ", gerente=" + gerente + ", entrella="
-				+ estrellas + ", compania=" + compania + "]";
+		return id + ", CIF=" + cif + ", Nombre=" + nombre + ", Gerente=" + gerente + ", Estrella/s="
+				+ estrellas + ", Compañia=" + compania;
 	}
 	
 	

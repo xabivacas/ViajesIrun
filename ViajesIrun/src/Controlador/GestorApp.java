@@ -63,7 +63,9 @@ public class GestorApp {
 				break;
 			case Visor.VISUALIZARHOTEL:
 				gs.conectar();
-				Visor.verUno(gs.buscarHotel(Formulario.pedirNombre(scan)));
+				Hotel h = gs.buscarHotel(Formulario.pedirNombre(scan));
+				Visor.verUno(h);
+				Visor.visuArray(gs.buscarHabitaciones(h));
 				gs.cerrar();
 				break;
 			case Visor.MODIFICARHOTEL:
