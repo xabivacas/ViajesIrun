@@ -1,5 +1,6 @@
 package Controlador;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Modelo.*;
@@ -59,7 +60,18 @@ public class GestorApp {
 				}
 				break;
 			case Visor.VISUALIZARHOTELES:
-				//TODO
+				gs.conectar();
+				ArrayList<Hotel> hoteles = gs.visualizarHoteles();
+				int i =0;
+				
+				while(i<hoteles.size()) {
+					Hotel h = gs.buscarHotel(hoteles.get(i).getNombre());
+					Visor.verUno(h);
+					Visor.visuArray(gs.buscarHabitaciones(h));
+					i++;
+					System.out.println("\n\n\n");
+				}
+				gs.cerrar();
 				break;
 			case Visor.VISUALIZARHOTEL:
 				gs.conectar();
