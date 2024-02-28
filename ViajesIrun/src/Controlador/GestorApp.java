@@ -57,7 +57,7 @@ public class GestorApp {
 				gs.insertarHotel(hotel);
 				
 				while(Formulario.quieresInsertarHabitacion(scan)) {
-					Hotel h = gs.buscarHotel(hotel.getNombre());
+					Hotel h = gs.getHotel(hotel.getNombre());
 					Visor.operacion(gs.insertarHabitacion(h,Formulario.pedirDatosHabitacion(scan, h)));
 				}
 				
@@ -68,7 +68,7 @@ public class GestorApp {
 				int i =0;
 				
 				while(i<hoteles.size()) {
-					Hotel h = gs.buscarHotel(hoteles.get(i).getNombre());
+					Hotel h = gs.getHotel(hoteles.get(i).getNombre());
 					
 					visuHotelyHabitaciones(gs, h);
 					
@@ -79,40 +79,30 @@ public class GestorApp {
 				break;
 			case Visor.VISUALIZARHOTEL:
 				gs.conectar();
-				Hotel h = gs.buscarHotel(Formulario.pedirNombre(scan));
+				Hotel h = gs.getHotel(Formulario.pedirNombre(scan));
 				visuHotelyHabitaciones(gs, h);
 				gs.cerrar();
 				break;
 			case Visor.MODIFICARHOTEL:
 				gs.conectar();
-				Hotel hot = gs.buscarHotel(Formulario.pedirNombre(scan));
+				Hotel hot = gs.getHotel(Formulario.pedirNombre(scan));
 				visuHotelyHabitaciones(gs, hot);
 				Visor.operacion(gs.modHotel(hot.getId(), Formulario.pedirDatosHotel(scan)));
 				break;
 			case Visor.BORRARHOTEL:
 				gs.conectar();
-				Visor.operacion(gs.borrarHotel(gs.buscarHotel(Formulario.pedirNombre(scan))));
+				Visor.operacion(gs.borrarHotel(gs.getHotel(Formulario.pedirNombre(scan))));
 				gs.cerrar();
 				break;
 			case Visor.INSERTARRESERVA:
+				insertarReserva(scan, gs);
+				break;
+			case Visor.VISUALIZARRESERVAS:
 				//TODO
 				gs.conectar();
-				try {
-					Reserva r = Formulario.pedirDatosReserva(scan, gs);
-					if(r.validar()) {
-						Visor.operacion(gs.insertarReserva(r));
-					}else {
-						Visor.operacion(false);
-					}
-				} catch (ParseException e) {
-					System.out.println("Ha habido un error con la reserva");
-					e.printStackTrace();
-				}
-				
+				Visor.visuArray(gs.getReservas());
+				gs.cerrar();
 				break;
-//			case Visor.VISUALIZARRESERVAS:
-//				//TODO
-//				break;
 //			case Visor.VISUALIZARRESERVA:
 //				//TODO
 //				break;
@@ -131,6 +121,21 @@ public class GestorApp {
 				break;
 			}
 		}while(select!=0);
+	}
+	private static void insertarReserva(Scanner scan, GestorBBDD gs) {
+		gs.conectar();
+		try {
+			Reserva r = Formulario.pedirDatosReserva(scan, gs);
+			if(r.validar()) {
+				Visor.operacion(gs.insertarReserva(r));
+			}else {
+				Visor.operacion(false);
+			}
+		} catch (ParseException e) {
+			System.out.println("Ha habido un error con la reserva");
+			e.printStackTrace();
+		}
+		gs.cerrar();
 	}
 	
 	private static void visuHotelyHabitaciones(GestorBBDD gs, Hotel h) {

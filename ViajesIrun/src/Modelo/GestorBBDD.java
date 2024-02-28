@@ -25,6 +25,7 @@ public class GestorBBDD extends Conector{
 				
 				clientes.add(c);
 			}
+			clientes.sort(new OrdenarClientes());
 		} catch (SQLException e) {
 			System.out.println("Ha fallado en visualizarClientes");
 			e.printStackTrace();
@@ -123,7 +124,7 @@ public class GestorBBDD extends Conector{
 		}
 	}
 	
-	public Hotel buscarHotel(String nombre) {
+	public Hotel getHotel(String nombre) {
 		String sql = "SELECT * FROM hoteles WHERE nombre=?";
 		Hotel h = new Hotel();
 		
@@ -131,21 +132,40 @@ public class GestorBBDD extends Conector{
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setString(1, nombre);
 			
-			ResultSet rs = pst.executeQuery();
-			rs.next();
-			
-			h.setId(rs.getInt("id"));
-			h.setCif(rs.getString("cif"));
-			h.setNombre(rs.getString("nombre"));
-			h.setEstrellas(rs.getInt("estrellas"));
-			h.setGerente(rs.getString("gerente"));
-			h.setCompania(rs.getString("compania"));
+			buscarHotelenBD(h, pst);
 			
 		} catch (SQLException e) {
 			System.out.println("Error en buscarHotel");
 			e.printStackTrace();
 		}
 		return h;
+	}
+	public Hotel getHotel(int id) {
+		String sql = "SELECT * FROM hoteles WHERE id=?";
+		Hotel h = new Hotel();
+		
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, id);
+			
+			buscarHotelenBD(h, pst);
+			
+		} catch (SQLException e) {
+			System.out.println("Error en buscarHotel");
+			e.printStackTrace();
+		}
+		return h;
+	}
+	private void buscarHotelenBD(Hotel h, PreparedStatement pst) throws SQLException {
+		ResultSet rs = pst.executeQuery();
+		rs.next();
+		
+		h.setId(rs.getInt("id"));
+		h.setCif(rs.getString("cif"));
+		h.setNombre(rs.getString("nombre"));
+		h.setEstrellas(rs.getInt("estrellas"));
+		h.setGerente(rs.getString("gerente"));
+		h.setCompania(rs.getString("compania"));
 	}
 	public boolean insertarHabitacion(Hotel hotel, Habitacion habitacion) {
 		String sql = "INSERT INTO habitaciones (id_hotel,numero,descripcion,precio) VALUES (?,?,?,?)";
@@ -189,21 +209,39 @@ public class GestorBBDD extends Conector{
 		return habitaciones;
 	}
 	
-	public Habitacion buscarHabitacion(Hotel hotel,int numero){
+	public Habitacion getHabitacion(Hotel hotel,int numero){
 		String sql = "SELECT * FROM habitaciones WHERE id_hotel=? AND numero=?";
 		Habitacion h = new Habitacion();
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setInt(1, hotel.getId());
 			pst.setInt(2, numero);
-			ResultSet rs = pst.executeQuery();
-			rs.next();
+			buscarHabitacionenBD(h, pst);
+				
+		} catch (SQLException e) {
+			System.out.println("Error buscarhabitaciones");
+			e.printStackTrace();
+		}
+		return h;
+	}
+	private void buscarHabitacionenBD(Habitacion h, PreparedStatement pst) throws SQLException {
+		ResultSet rs = pst.executeQuery();
+		rs.next();
+		
+		h.setId(rs.getInt("id"));
+		h.setHotel(getHotel(rs.getInt("id_hotel")));
+		h.setNumero(rs.getInt("numero"));
+		h.setDescripcion(rs.getString("descripcion"));
+		h.setPrecio(rs.getInt("precio"));
+	}
+	public Habitacion getHabitacion(int id){
+		String sql = "SELECT * FROM habitaciones WHERE id=?";
+		Habitacion h = new Habitacion();
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, id);
 			
-			h.setId(rs.getInt("id"));
-			h.setHotel(hotel);
-			h.setNumero(rs.getInt("numero"));
-			h.setDescripcion(rs.getString("descripcion"));
-			h.setPrecio(rs.getInt("precio"));
+			buscarHabitacionenBD(h, pst);
 				
 		} catch (SQLException e) {
 			System.out.println("Error buscarhabitaciones");
@@ -285,6 +323,29 @@ public class GestorBBDD extends Conector{
 			e.printStackTrace();
 			return false;
 		}
-		
+	}
+	public ArrayList<Reserva> getReservas(){
+		ArrayList<Reserva> reservas = new ArrayList<>();
+		String sql = "SELECT * FROM reservas";
+		try {
+			ResultSet rs = cn.createStatement().executeQuery(sql);
+			
+			while(rs.next()) {
+				Reserva r = new Reserva();
+				
+				r.setId(rs.getInt("id"));
+				r.setCliente(getCliente(rs.getString("dni")));
+				r.setHabitacion(getHabitacion(rs.getInt("id_habitacion")));
+				r.setDesde((java.util.Date)rs.getDate("desde"));
+				r.setHasta((java.util.Date)rs.getDate("hasta"));
+				
+				reservas.add(r);
+			}
+			reservas.sort(new OrdenarFechas());
+		} catch (SQLException e) {
+			System.out.println("Error getReservas");
+			e.printStackTrace();
+		}
+		return reservas;
 	}
 }

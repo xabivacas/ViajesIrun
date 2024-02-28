@@ -25,9 +25,9 @@ public class Visor {
 		System.out.println("\n---Menu---");
 		menuClientes();
 		menuHoteles();
-//		System.out.println("\nGestionar Reservas");
-//		System.out.println("   "+INSERTARRESERVA+"-Insertar Reserva");
-//		System.out.println("   "+VISUALIZARRESERVAS+"-Ver Reservas");
+		System.out.println("\nGestionar Reservas");
+		System.out.println("   "+INSERTARRESERVA+"-Insertar Reserva");
+		System.out.println("   "+VISUALIZARRESERVAS+"-Ver Reservas");
 //		System.out.println("   "+VISUALIZARRESERVA+"-Buscar Reserva");
 //		System.out.println("   "+MODIFICARRESERVA+"-Modificar Reserva");
 //		System.out.println("   "+BORRARRESERVA+"-Borrar Reserva");
