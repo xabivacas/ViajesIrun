@@ -1,5 +1,8 @@
 package Vista;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 import Controlador.GestorApp;
@@ -11,7 +14,7 @@ public class Formulario {
 		return scan.nextLine();
 	}
 	public static String pedirNombre(Scanner scan) {
-		System.out.println("Introduzca el Nombre");
+		System.out.println("Introduzca el nombre del hotel");
 		return scan.nextLine();
 	}
 	public static Cliente pedirDatosCliente(Scanner scan) {
@@ -79,19 +82,26 @@ public class Formulario {
 			return false;
 		}
 	}
-	public static Reserva pedirDatosReserva(Scanner scan, GestorBBDD gs) {
+	public static Reserva pedirDatosReserva(Scanner scan, GestorBBDD gs) throws ParseException {
 		Reserva r = new Reserva();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		System.out.println("Inserte el Dni");
-		r.setCliente(gs.buscarCliente(scan.nextLine()));
+		r.setCliente(gs.getCliente(scan.nextLine()));
 		
-		System.out.println("Inserte el nombre del hotel");
 		Hotel h = gs.buscarHotel(Formulario.pedirNombre(scan));
 		Visor.verUno(h);
 		Visor.visuArray(gs.buscarHabitaciones(h));
 		
 		System.out.println("Seleccione la habitacion");
-		r.setHabitacion(gs.bu);
+		r.setHabitacion(gs.buscarHabitacion(h, Integer.parseInt(scan.nextLine())));
+		
+		System.out.println("¿Desde que fecha va a reservar ?");
+		r.setDesde(sdf.parse(scan.nextLine()));
+			
+		System.out.println("¿Hasta que dia");
+		r.setHasta(sdf.parse(scan.nextLine()));;
+		
 		return r;
 	}
 }

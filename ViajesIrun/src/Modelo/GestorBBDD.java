@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class GestorBBDD extends Conector{
 
-	public ArrayList<Cliente> visualizarClientes(){
+	public ArrayList<Cliente> getClientes(){
 		ArrayList<Cliente> clientes = new ArrayList<>();
 		String sql = "SELECT * FROM clientes";
 		
@@ -31,7 +31,7 @@ public class GestorBBDD extends Conector{
 		}
 		return clientes;
 	}
-	public Cliente buscarCliente(String DNI) {
+	public Cliente getCliente(String DNI) {
 		Cliente c = new Cliente();
 		String sql = "SELECT * FROM clientes WHERE DNI=?";
 		
@@ -191,27 +191,25 @@ public class GestorBBDD extends Conector{
 	
 	public Habitacion buscarHabitacion(Hotel hotel,int numero){
 		String sql = "SELECT * FROM habitaciones WHERE id_hotel=? AND numero=?";
+		Habitacion h = new Habitacion();
 		try {
 			PreparedStatement pst = cn.prepareStatement(sql);
 			pst.setInt(1, hotel.getId());
 			pst.setInt(2, numero);
 			ResultSet rs = pst.executeQuery();
+			rs.next();
 			
-			while (rs.next()) {
-				Habitacion h = new Habitacion();
+			h.setId(rs.getInt("id"));
+			h.setHotel(hotel);
+			h.setNumero(rs.getInt("numero"));
+			h.setDescripcion(rs.getString("descripcion"));
+			h.setPrecio(rs.getInt("precio"));
 				
-				h.setId(rs.getInt("id"));
-				h.setHotel(hotel);
-				h.setNumero(rs.getInt("numero"));
-				h.setDescripcion(rs.getString("descripcion"));
-				h.setPrecio(rs.getInt("precio"));
-				
-			}
 		} catch (SQLException e) {
 			System.out.println("Error buscarhabitaciones");
 			e.printStackTrace();
 		}
-		return habitaciones;
+		return h;
 	}
 	public ArrayList<Hotel> visualizarHoteles(){
 		String sql = "SELECT * FROM hoteles";
@@ -272,4 +270,21 @@ public class GestorBBDD extends Conector{
 		}
 	}
 	
+	public boolean insertarReserva(Reserva r) {
+		String sql = "INSERT INTO reservas (id_habitacion,dni,desde,hasta) VALUES (?,?,?,?)";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setInt(1, r.getHabitacion().getId());
+			pst.setString(2,r.getCliente().getDni());
+			pst.setDate(3, new java.sql.Date(r.getDesde().getTime()));
+			pst.setDate(4, new java.sql.Date(r.getHasta().getTime()));
+			
+			pst.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+	}
 }

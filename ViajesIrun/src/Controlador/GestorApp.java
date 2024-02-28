@@ -1,5 +1,6 @@
 package Controlador;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -27,20 +28,20 @@ public class GestorApp {
 				
 			case Visor.VISUALIZARCLIENTES:
 				gs.conectar();
-				Visor.visuArray(gs.visualizarClientes());
+				Visor.visuArray(gs.getClientes());
 				gs.cerrar();
 				break;
 				
 			case Visor.VISUALIZARCLIENTE:
 				gs.conectar();
-				Visor.verUno(gs.buscarCliente(Formulario.pedirDNI(scan)));
+				Visor.verUno(gs.getCliente(Formulario.pedirDNI(scan)));
 				gs.cerrar();
 				break;
 				
 			case Visor.MODIFICARCLIENTE:
 				gs.conectar();
 				String DNI= Formulario.pedirDNI(scan);
-				Visor.verUno(gs.buscarCliente(DNI));
+				Visor.verUno(gs.getCliente(DNI));
 				Visor.operacion(gs.modificarCliente(DNI, Formulario.pedirDatosCliente(scan)));
 				break;
 				
@@ -93,9 +94,22 @@ public class GestorApp {
 				Visor.operacion(gs.borrarHotel(gs.buscarHotel(Formulario.pedirNombre(scan))));
 				gs.cerrar();
 				break;
-//			case Visor.INSERTARRESERVA:
-//				//TODO
-//				break;
+			case Visor.INSERTARRESERVA:
+				//TODO
+				gs.conectar();
+				try {
+					Reserva r = Formulario.pedirDatosReserva(scan, gs);
+					if(r.validar()) {
+						Visor.operacion(gs.insertarReserva(r));
+					}else {
+						Visor.operacion(false);
+					}
+				} catch (ParseException e) {
+					System.out.println("Ha habido un error con la reserva");
+					e.printStackTrace();
+				}
+				
+				break;
 //			case Visor.VISUALIZARRESERVAS:
 //				//TODO
 //				break;

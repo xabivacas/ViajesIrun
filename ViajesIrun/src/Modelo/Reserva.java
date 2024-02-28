@@ -47,4 +47,11 @@ public class Reserva {
 				+ ", hasta=" + hasta + "]";
 	}
 	
+	public boolean validar() {
+		if(desde.before(hasta)&&desde.after(new Date())) {
+			return true;
+		}else {
+			return false;
+		}
+	}
 }
