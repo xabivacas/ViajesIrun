@@ -16,6 +16,7 @@ public class GestorApp {
 		Scanner scan = new Scanner(System.in); 
 		int select=0;
 		GestorBBDD gs = new GestorBBDD();
+		
 		do {
 			Visor.menu();
 			select=Integer.parseInt(scan.nextLine());
@@ -100,9 +101,19 @@ public class GestorApp {
 			case Visor.VISUALIZARRESERVAS:
 				//TODO
 				gs.conectar();
-				Visor.visuArray(gs.getReservas());
+//				Visor.visuArray(gs.getReservas());
 				gs.cerrar();
 				break;
+			case Visor.VISUALIZARRESERVASDECLIENTE:
+				//TODO
+				gs.conectar();
+				String dni = Formulario.pedirDNI(scan);
+				Cliente cliente = gs.getCliente(dni);
+				ArrayList<Reserva> reservas = gs.getReservasDeCliente(cliente);
+				
+				Visor.verUno(cliente);
+				Visor.visuArrayReservasCliente(reservas);
+				gs.cerrar();
 //			case Visor.VISUALIZARRESERVA:
 //				//TODO
 //				break;

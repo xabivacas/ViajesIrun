@@ -330,20 +330,38 @@ public class GestorBBDD extends Conector{
 		try {
 			ResultSet rs = cn.createStatement().executeQuery(sql);
 			
-			while(rs.next()) {
-				Reserva r = new Reserva();
-				
-				r.setId(rs.getInt("id"));
-				r.setCliente(getCliente(rs.getString("dni")));
-				r.setHabitacion(getHabitacion(rs.getInt("id_habitacion")));
-				r.setDesde((java.util.Date)rs.getDate("desde"));
-				r.setHasta((java.util.Date)rs.getDate("hasta"));
-				
-				reservas.add(r);
-			}
+			rellenarArrarReservas(reservas, rs);
 			reservas.sort(new OrdenarFechas());
 		} catch (SQLException e) {
 			System.out.println("Error getReservas");
+			e.printStackTrace();
+		}
+		return reservas;
+	}
+	private void rellenarArrarReservas(ArrayList<Reserva> reservas, ResultSet rs) throws SQLException {
+		while(rs.next()) {
+			Reserva r = new Reserva();
+			
+			r.setId(rs.getInt("id"));
+			r.setCliente(getCliente(rs.getString("dni")));
+			r.setHabitacion(getHabitacion(rs.getInt("id_habitacion")));
+			r.setDesde((java.util.Date)rs.getDate("desde"));
+			r.setHasta((java.util.Date)rs.getDate("hasta"));
+			
+			reservas.add(r);
+		}
+	}
+	
+	public ArrayList<Reserva> getReservasDeCliente(Cliente c) {
+		ArrayList<Reserva> reservas = new ArrayList<>();
+		String sql = "SELECT * FROM reservas WHERE dni=?";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, c.getDni());
+			
+			ResultSet rs = pst.executeQuery();
+			rellenarArrarReservas(reservas, rs);
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return reservas;
