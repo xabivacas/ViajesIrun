@@ -43,7 +43,7 @@ public class GestorApp {
 				gs.conectar();
 				String DNI= Formulario.pedirDNI(scan);
 				Visor.verUno(ClienteModelo.getCliente(DNI));
-				Visor.operacion(gs.modificarCliente(DNI, Formulario.pedirDatosCliente(scan)));
+				Visor.operacion(ClienteModelo.modificarCliente(DNI, Formulario.pedirDatosCliente(scan)));
 				break;
 				
 			case Visor.BORRARCLIENTE:
