@@ -6,30 +6,6 @@ import java.util.Scanner;
 
 public class GestorBBDD extends Conector{
 
-	
-	public Cliente getCliente(String DNI) {
-		Cliente c = new Cliente();
-		String sql = "SELECT * FROM clientes WHERE DNI=?";
-		
-		try {
-			PreparedStatement pst = cn.prepareStatement(sql);
-			pst.setString(1, DNI);
-			
-			ResultSet rs = pst.executeQuery();
-			rs.next();
-			
-			c.setDni(rs.getString("DNI"));
-			c.setNombre(rs.getString("nombre"));
-			c.setApellido(rs.getString("apellidos"));
-			c.setDireccion(rs.getString("direccion"));
-			c.setLocalidad(rs.getString("localidad"));
-
-		} catch (SQLException e) {
-			System.out.println("Ha fallado en buscarCliente");
-			e.printStackTrace();
-		}
-		return c;
-	}
 	public boolean insertarCliente(Cliente c) {
 		String sql = "INSERT INTO clientes VALUES (?,?,?,?,?)";
 		try {
@@ -45,9 +21,7 @@ public class GestorBBDD extends Conector{
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
-		}
-		
-		
+		}		
 	}
 	public boolean borrarCliente(String DNI) {
 		String sql = "DELETE FROM clientes WHERE DNI=?";
@@ -318,7 +292,7 @@ public class GestorBBDD extends Conector{
 			Reserva r = new Reserva();
 			
 			r.setId(rs.getInt("id"));
-			r.setCliente(getCliente(rs.getString("dni")));
+			r.setCliente(ClienteModelo.getCliente(rs.getString("dni")));
 			r.setHabitacion(getHabitacion(rs.getInt("id_habitacion")));
 			r.setDesde((java.util.Date)rs.getDate("desde"));
 			r.setHasta((java.util.Date)rs.getDate("hasta"));

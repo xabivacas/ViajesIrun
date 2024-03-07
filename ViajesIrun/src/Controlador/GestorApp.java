@@ -35,14 +35,14 @@ public class GestorApp {
 				
 			case Visor.VISUALIZARCLIENTE:
 				gs.conectar();
-				Visor.verUno(gs.getCliente(Formulario.pedirDNI(scan)));
+				Visor.verUno(ClienteModelo.getCliente(Formulario.pedirDNI(scan)));
 				gs.cerrar();
 				break;
 				
 			case Visor.MODIFICARCLIENTE:
 				gs.conectar();
 				String DNI= Formulario.pedirDNI(scan);
-				Visor.verUno(gs.getCliente(DNI));
+				Visor.verUno(ClienteModelo.getCliente(DNI));
 				Visor.operacion(gs.modificarCliente(DNI, Formulario.pedirDatosCliente(scan)));
 				break;
 				
@@ -108,7 +108,7 @@ public class GestorApp {
 				//TODO
 				gs.conectar();
 				String dni = Formulario.pedirDNI(scan);
-				Cliente cliente = gs.getCliente(dni);
+				Cliente cliente = ClienteModelo.getCliente(dni);
 				ArrayList<Reserva> reservas = gs.getReservasDeCliente(cliente);
 				
 				Visor.verUno(cliente);

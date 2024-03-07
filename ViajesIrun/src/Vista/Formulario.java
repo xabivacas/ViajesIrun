@@ -87,7 +87,7 @@ public class Formulario {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		System.out.println("Inserte el Dni");
-		r.setCliente(gs.getCliente(scan.nextLine()));
+		r.setCliente(ClienteModelo.getCliente(scan.nextLine()));
 		
 		Hotel h = gs.getHotel(Formulario.pedirNombre(scan));
 		Visor.verUno(h);
