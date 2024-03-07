@@ -55,21 +55,21 @@ public class GestorApp {
 			case Visor.INSERTARHOTEL:
 				gs.conectar();
 				Hotel hotel = Formulario.pedirDatosHotel(scan);
-				gs.insertarHotel(hotel);
+				HotelModelo.insertarHotel(hotel);
 				
 				while(Formulario.quieresInsertarHabitacion(scan)) {
-					Hotel h = gs.getHotel(hotel.getNombre());
-					Visor.operacion(gs.insertarHabitacion(h,Formulario.pedirDatosHabitacion(scan, h)));
+					Hotel h = HotelModelo.getHotel(hotel.getNombre());
+					Visor.operacion(HabitacionModelo.insertarHabitacion(h,Formulario.pedirDatosHabitacion(scan, h)));
 				}
 				
 				break;
 			case Visor.VISUALIZARHOTELES:
 				gs.conectar();
-				ArrayList<Hotel> hoteles = gs.visualizarHoteles();
+				ArrayList<Hotel> hoteles = HotelModelo.visualizarHoteles();
 				int i =0;
 				
 				while(i<hoteles.size()) {
-					Hotel h = gs.getHotel(hoteles.get(i).getNombre());
+					Hotel h = HotelModelo.getHotel(hoteles.get(i).getNombre());
 					
 					visuHotelyHabitaciones(gs, h);
 					
@@ -80,19 +80,19 @@ public class GestorApp {
 				break;
 			case Visor.VISUALIZARHOTEL:
 				gs.conectar();
-				Hotel h = gs.getHotel(Formulario.pedirNombre(scan));
+				Hotel h = HotelModelo.getHotel(Formulario.pedirNombre(scan));
 				visuHotelyHabitaciones(gs, h);
 				gs.cerrar();
 				break;
 			case Visor.MODIFICARHOTEL:
 				gs.conectar();
-				Hotel hot = gs.getHotel(Formulario.pedirNombre(scan));
+				Hotel hot = HotelModelo.getHotel(Formulario.pedirNombre(scan));
 				visuHotelyHabitaciones(gs, hot);
-				Visor.operacion(gs.modHotel(hot.getId(), Formulario.pedirDatosHotel(scan)));
+				Visor.operacion(HotelModelo.modHotel(hot.getId(), Formulario.pedirDatosHotel(scan)));
 				break;
 			case Visor.BORRARHOTEL:
 				gs.conectar();
-				Visor.operacion(gs.borrarHotel(gs.getHotel(Formulario.pedirNombre(scan))));
+				Visor.operacion(HotelModelo.borrarHotel(HotelModelo.getHotel(Formulario.pedirNombre(scan))));
 				gs.cerrar();
 				break;
 			case Visor.INSERTARRESERVA:
@@ -101,7 +101,7 @@ public class GestorApp {
 			case Visor.VISUALIZARRESERVAS:
 				//TODO
 				gs.conectar();
-				Visor.visuArray(gs.getReservas());
+				Visor.visuArray(ReservaModelo.getReservas());
 				gs.cerrar();
 				break;
 			case Visor.VISUALIZARRESERVASDECLIENTE:
@@ -109,7 +109,7 @@ public class GestorApp {
 				gs.conectar();
 				String dni = Formulario.pedirDNI(scan);
 				Cliente cliente = ClienteModelo.getCliente(dni);
-				ArrayList<Reserva> reservas = gs.getReservasDeCliente(cliente);
+				ArrayList<Reserva> reservas = ReservaModelo.getReservasDeCliente(cliente);
 				
 				Visor.verUno(cliente);
 				Visor.visuArrayReservasCliente(reservas);
@@ -138,7 +138,7 @@ public class GestorApp {
 		try {
 			Reserva r = Formulario.pedirDatosReserva(scan, gs);
 			if(r.validar()) {
-				Visor.operacion(gs.insertarReserva(r));
+				Visor.operacion(ReservaModelo.insertarReserva(r));
 			}else {
 				Visor.operacion(false);
 			}
@@ -151,6 +151,6 @@ public class GestorApp {
 	
 	private static void visuHotelyHabitaciones(GestorBBDD gs, Hotel h) {
 		Visor.verUno(h);
-		Visor.visuArray(gs.buscarHabitaciones(h));
+		Visor.visuArray(HabitacionModelo.buscarHabitaciones(h));
 	}
 }

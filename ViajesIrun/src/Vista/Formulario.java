@@ -89,17 +89,17 @@ public class Formulario {
 		System.out.println("Inserte el Dni");
 		r.setCliente(ClienteModelo.getCliente(scan.nextLine()));
 		
-		Hotel h = gs.getHotel(Formulario.pedirNombre(scan));
+		Hotel h = HotelModelo.getHotel(Formulario.pedirNombre(scan));
 		Visor.verUno(h);
-		Visor.visuArray(gs.buscarHabitaciones(h));
+		Visor.visuArray(HabitacionModelo.buscarHabitaciones(h));
 		
 		System.out.println("Seleccione la habitacion");
-		r.setHabitacion(gs.getHabitacion(h, Integer.parseInt(scan.nextLine())));
+		r.setHabitacion(HabitacionModelo.getHabitacion(h, Integer.parseInt(scan.nextLine())));
 		
-		System.out.println("¿Desde que fecha va a reservar ?");
+		System.out.println("¿Desde que fecha va a reservar (yyyy-MM-dd)?");
 		r.setDesde(sdf.parse(scan.nextLine()));
 			
-		System.out.println("¿Hasta que dia");
+		System.out.println("¿Hasta que dia (yyyy-MM-dd)");
 		r.setHasta(sdf.parse(scan.nextLine()));;
 		
 		return r;
