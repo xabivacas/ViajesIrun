@@ -23,7 +23,7 @@ public class GestorApp {
 			switch(select) {
 			case Visor.INSERTARCLIENTE:
 				gs.conectar();
-				Visor.operacion(gs.insertarCliente(Formulario.pedirDatosCliente(scan)));
+				Visor.operacion(ClienteModelo.insertarCliente(Formulario.pedirDatosCliente(scan)));
 				gs.cerrar();
 				break;
 				
