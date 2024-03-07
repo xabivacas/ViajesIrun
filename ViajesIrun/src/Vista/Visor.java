@@ -77,7 +77,7 @@ public class Visor {
 	public static void visuArrayReservasCliente(ArrayList<Reserva> reservas) {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 		for(Reserva r : reservas) {
-			System.out.println("Hotel: " + r.getHabitacion().getHotel().getNombre()+ " Desde: " +sdf.format(r.getDesde()) + " Hasta: "+sdf.format(r.getHasta()));
+			System.out.println("Hotel: " + r.getHabitacion().getHotel().getNombre()+ " Habitacion: "+r.getHabitacion().getNumero()+ " Desde: " +sdf.format(r.getDesde()) + " Hasta: "+sdf.format(r.getHasta()));
 		}
 	}
 }

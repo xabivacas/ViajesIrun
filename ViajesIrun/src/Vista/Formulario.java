@@ -84,10 +84,22 @@ public class Formulario {
 	}
 	public static Reserva pedirDatosReserva(Scanner scan, GestorBBDD gs) throws ParseException {
 		Reserva r = new Reserva();
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		System.out.println("Inserte el Dni");
 		r.setCliente(ClienteModelo.getCliente(scan.nextLine()));
+		
+		pedirDateyHotel(scan,r);
+		
+		return r;
+	}
+	public static Reserva pedirDatosReservaBorrar(Scanner scan) throws ParseException {
+		Reserva r = new Reserva();
+		pedirDateyHotel(scan, r);
+		return r;
+	}
+	
+	private static void pedirDateyHotel(Scanner scan,Reserva r) throws ParseException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		Hotel h = HotelModelo.getHotel(Formulario.pedirNombre(scan));
 		Visor.verUno(h);
@@ -96,12 +108,10 @@ public class Formulario {
 		System.out.println("Seleccione la habitacion");
 		r.setHabitacion(HabitacionModelo.getHabitacion(h, Integer.parseInt(scan.nextLine())));
 		
-		System.out.println("¿Desde que fecha va a reservar (yyyy-MM-dd)?");
+		System.out.println("¿Desde que fecha (yyyy-MM-dd)?");
 		r.setDesde(sdf.parse(scan.nextLine()));
 			
 		System.out.println("¿Hasta que dia (yyyy-MM-dd)");
 		r.setHasta(sdf.parse(scan.nextLine()));;
-		
-		return r;
 	}
 }

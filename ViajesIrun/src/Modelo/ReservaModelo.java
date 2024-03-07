@@ -64,4 +64,18 @@ public class ReservaModelo extends Conector {
 			return false;
 		}
 	}
+	public static boolean deleteReserva(Reserva r) {
+		String sql = "DELETE FROM reservas WHERE dni=? AND id_habitacion=? AND desde=?";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, r.getCliente().getDni());
+			pst.setInt(2,r.getHabitacion().getId());
+			
+			pst.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

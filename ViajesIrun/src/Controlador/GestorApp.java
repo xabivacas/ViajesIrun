@@ -105,24 +105,32 @@ public class GestorApp {
 				gs.cerrar();
 				break;
 			case Visor.VISUALIZARRESERVASDECLIENTE:
-				//TODO
 				gs.conectar();
 				String dni = Formulario.pedirDNI(scan);
 				Cliente cliente = ClienteModelo.getCliente(dni);
-				ArrayList<Reserva> reservas = ReservaModelo.getReservasDeCliente(cliente);
-				
-				Visor.verUno(cliente);
-				Visor.visuArrayReservasCliente(reservas);
+				getReservas(scan, cliente);
 				gs.cerrar();
+				break;
 //			case Visor.VISUALIZARRESERVA:
 //				//TODO
 //				break;
 //			case Visor.MODIFICARRESERVA:
 //				//TODO
 //				break;
-//			case Visor.BORRARRESERVA:
-//				//TODO
-//				break;
+			case Visor.BORRARRESERVA:
+				//TODO
+				dni = Formulario.pedirDNI(scan);
+				cliente = ClienteModelo.getCliente(dni);
+				Reserva r= new Reserva();
+				
+				getReservas(scan, cliente);
+				try {
+					r=Formulario.pedirDatosReservaBorrar(scan);
+					ReservaModelo.deleteReserva(r);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+				break;
 			case Visor.SALIR:
 				//TODO
 				break;
@@ -152,5 +160,13 @@ public class GestorApp {
 	private static void visuHotelyHabitaciones(GestorBBDD gs, Hotel h) {
 		Visor.verUno(h);
 		Visor.visuArray(HabitacionModelo.buscarHabitaciones(h));
+	}
+	private static ArrayList<Reserva> getReservas (Scanner scan,Cliente cliente){
+		
+		ArrayList<Reserva> reservas = ReservaModelo.getReservasDeCliente(cliente);
+		
+		Visor.verUno(cliente);
+		Visor.visuArrayReservasCliente(reservas);
+		return reservas;
 	}
 }
