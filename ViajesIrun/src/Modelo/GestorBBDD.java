@@ -6,20 +6,6 @@ import java.util.Scanner;
 
 public class GestorBBDD extends Conector{
 
-	public boolean borrarCliente(String DNI) {
-		String sql = "DELETE FROM clientes WHERE DNI=?";
-		try {
-			PreparedStatement pst = cn.prepareStatement(sql);
-			pst.setString(1, DNI);
-			pst.execute();
-			
-			return true;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
 	public boolean modificarCliente(String DNI, Cliente c) {
 		String sql = "UPDATE clientes SET DNI=?, nombre=?, apellidos=?, direccion=?, localidad=? WHERE DNI = ?";
 		try {

@@ -74,4 +74,17 @@ public class ClienteModelo extends Conector {
 			return false;
 		}		
 	}
+	public static boolean borrarCliente(String DNI) {
+		String sql = "DELETE FROM clientes WHERE DNI=?";
+		try {
+			PreparedStatement pst = cn.prepareStatement(sql);
+			pst.setString(1, DNI);
+			pst.execute();
+			
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
 }

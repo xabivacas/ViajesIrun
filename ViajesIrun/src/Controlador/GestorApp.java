@@ -48,7 +48,7 @@ public class GestorApp {
 				
 			case Visor.BORRARCLIENTE:
 				gs.conectar();
-				Visor.operacion(gs.borrarCliente(Formulario.pedirDNI(scan)));
+				Visor.operacion(ClienteModelo.borrarCliente(Formulario.pedirDNI(scan)));
 				gs.cerrar();
 				break;
 				
