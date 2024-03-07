@@ -20,8 +20,7 @@ public class Visor {
 	public static final int BORRARHOTEL= 25;
 	public static final int INSERTARRESERVA= 31;
 	public static final int VISUALIZARRESERVAS= 32;
-	public static final int VISUALIZARRESERVA= 33;
-	public static final int VISUALIZARRESERVASDECLIENTE= 34;
+	public static final int VISUALIZARRESERVASDECLIENTE= 33;
 	public static final int MODIFICARRESERVA= 34;
 	public static final int BORRARRESERVA= 35;
 	
@@ -33,7 +32,6 @@ public class Visor {
 		System.out.println("   "+INSERTARRESERVA+"-Insertar Reserva");
 		System.out.println("   "+VISUALIZARRESERVAS+"-Ver Reservas");
 		System.out.println("   "+VISUALIZARRESERVASDECLIENTE+"-Ver Reservas de un cliente");
-//		System.out.println("   "+VISUALIZARRESERVA+"-Buscar Reserva");
 //		System.out.println("   "+MODIFICARRESERVA+"-Modificar Reserva");
 //		System.out.println("   "+BORRARRESERVA+"-Borrar Reserva");
 //		

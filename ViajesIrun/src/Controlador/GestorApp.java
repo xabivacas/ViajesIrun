@@ -29,7 +29,7 @@ public class GestorApp {
 				
 			case Visor.VISUALIZARCLIENTES:
 				gs.conectar();
-				Visor.visuArray(gs.getClientes());
+				Visor.visuArray(ClienteModelo.getClientes());
 				gs.cerrar();
 				break;
 				
@@ -101,7 +101,7 @@ public class GestorApp {
 			case Visor.VISUALIZARRESERVAS:
 				//TODO
 				gs.conectar();
-//				Visor.visuArray(gs.getReservas());
+				Visor.visuArray(gs.getReservas());
 				gs.cerrar();
 				break;
 			case Visor.VISUALIZARRESERVASDECLIENTE:
